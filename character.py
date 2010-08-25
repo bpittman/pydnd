@@ -27,6 +27,7 @@ class Character:
       self.abilityMod = dict((a,0) for a in abilities)
       self.skill = dict((s,Skill(a)) for s,a in skills)
       self.setLvl(1)
+      self.proficiency = defaultdict(int)
 
    def setLvl(self,lvl):
       self.lvl = lvl
@@ -40,6 +41,9 @@ class Character:
    def setSkills(self,**kwargs):
       for skill in self.skill:
          if skill in kwargs: self.skill[skill].setTrained(kwargs[skill])
+
+   def setProficiency(self,name,value):
+      self.proficiency[name] = value
 
    def updateAbilityMods(self):
       for m in self.abilityMod:
