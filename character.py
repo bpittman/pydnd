@@ -28,6 +28,8 @@ class Character:
       self.skill = dict((s,Skill(a)) for s,a in skills)
       self.setLvl(1)
       self.proficiency = defaultdict(int)
+      self.equipped = {}
+      self.powers = {}
 
    def setLvl(self,lvl):
       self.lvl = lvl
@@ -52,4 +54,19 @@ class Character:
    def updateSkills(self):
       for s in self.skill:
          self.skill[s].update(self.lvl,self.abilityMod)
+
+   def setEquip(self,**kwargs):
+      for hand in kwargs:
+         self.equipped[hand] = kwargs[hand]
+
+   def setPower(self,**kwargs):
+      for power in kwargs:
+         self.powers[power] = kwargs[power]
+
+   def usePower(self,power,hand="main",output=True):
+      if hand in self.equipped and power in self.powers:
+         self.powers[power].use(self,self.equipped[hand])
+      if output:
+         print "attack bonus:", self.powers[power].attackBonus
+         print "normal damage:", self.powers[power].totalDamage
 

@@ -51,7 +51,10 @@ class TestWeapon(unittest.TestCase):
       self.slyFlourish = Power()
       self.slyFlourish.attackType = 'dex'
       self.slyFlourish.abilityModDamage = ['dex','cha']
-      self.slyFlourish.use(self.linder,self.misericorde)
+
+      self.linder.setEquip(main=self.misericorde)
+      self.linder.setPower(slyFlourish=self.slyFlourish)
+      self.linder.usePower("slyFlourish",output=False)
 
    def test_power_attack_bonus(self):
       self.assertEqual(self.slyFlourish.attackBonus, 17)
