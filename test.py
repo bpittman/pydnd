@@ -43,7 +43,8 @@ class TestWeapon(unittest.TestCase):
 
       self.misericorde = Weapon()
       self.misericorde.enhancement = 3
-      self.misericorde.damageDie = '1d8'
+      self.misericorde.damageDie = 'd8'
+      self.misericorde.numDie = 1
       self.misericorde.critDamage = '3d6'
       self.misericorde.damageType = 'str'
       self.misericorde.keywords = ['dagger','lightBlade','radiant']
@@ -59,6 +60,8 @@ class TestWeapon(unittest.TestCase):
    def test_power_attack_bonus(self):
       self.assertEqual(self.slyFlourish.attackBonus, 17)
       self.assertEqual(self.slyFlourish.totalDamage, '1d8+14')
+      self.assertEqual(self.slyFlourish.maxDamage, 22)
+      self.assertEqual(self.slyFlourish.maxPlusWeapon, '1d8+22')
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,6 +12,15 @@ class Power:
       self.attackBonus = char.lvl/2 + char.abilityMod[self.attackType]
       self.attackBonus += char.proficiency[weapon.weaponType] + weapon.enhancement
 
-      self.damageBonus = self.weaponsOfDamage*(char.abilityMod[weapon.damageType] + weapon.enhancement)
-      self.damageBonus += sum([char.abilityMod[mod] for mod in self.abilityModDamage])
-      self.totalDamage = weapon.damageDie + '+' + str(self.damageBonus)
+      perWeaponDamageBonus = char.abilityMod[weapon.damageType] + weapon.enhancement
+      weaponDamageBonus = self.weaponsOfDamage*(perWeaponDamageBonus)
+      abilityWeaponBonus = sum([char.abilityMod[mod] for mod in self.abilityModDamage])
+
+      weaponString = str(self.weaponsOfDamage*weapon.numDie) + weapon.damageDie
+
+      self.totalDamage =  weaponString + '+' + str(weaponDamageBonus+abilityWeaponBonus)
+
+      #house rules crit system
+      self.maxDamage = self.weaponsOfDamage*(perWeaponDamageBonus + int(weapon.damageDie[1:])*weapon.numDie)
+      self.maxDamage += abilityWeaponBonus
+      self.maxPlusWeapon = str(weapon.numDie) + weapon.damageDie + '+' + str(self.maxDamage)

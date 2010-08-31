@@ -69,4 +69,6 @@ class Character:
       if output:
          print "attack bonus:", self.powers[power].attackBonus
          print "normal damage:", self.powers[power].totalDamage
-
+         print "max damage:", self.powers[power].maxDamage
+         print "max+weap damage:", self.powers[power].maxPlusWeapon
+         print "double max damage:", 2*self.powers[power].maxDamage

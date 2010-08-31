@@ -26,7 +26,8 @@ class Misericorde(Weapon):
    def __init__(self):
       Weapon.__init__(self)
       self.enhancement = 3
-      self.damageDie = '1d8'
+      self.damageDie = 'd8'
+      self.numDie = 1
       self.critDamage = '3d6'
       self.damageType = 'str'
       self.keywords = ['dagger','lightBlade','radiant']
