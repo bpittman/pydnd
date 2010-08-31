@@ -1,0 +1,12 @@
+pydnd is a set of python classes designed to be used interactively to assist in
+running a Dungeons & Dragons 4th edition character.
+
+For an (evolving) example setup see linder.py
+
+The classes are intended to act as a basic framework. Due to the complexity,
+variety, and scope of D&D4e, it is not feasible to include support for every
+power/race/class, so you will have to write custom code to handle special cases.
+
+The eventual goal is to remove most of the tedium of arithmetic and power
+usage tracking from a D&D session. However, there are no plans to add a
+simulated dice roller, because rolling dice is fun, dammit.
