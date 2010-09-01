@@ -50,7 +50,30 @@ class Misericorde(Weapon):
       self.numDie = 1
       self.critDamage = '3d6'
       self.damageType = 'str'
+      self.weaponType = 'dagger'
       self.keywords = ['dagger','lightBlade','radiant']
+
+class PoisonedCrossbow(Weapon):
+   def __init__(self):
+      Weapon.__init__(self)
+      self.enhancement = 1
+      self.damageDie = 'd6'
+      self.numDie = 1
+      self.critDamage = ''
+      self.damageType = 'dex'
+      self.weaponType = 'handCrossbow'
+      self.keywords = ['handCrossbow','ranged']
+
+class CloakedDagger(Weapon):
+   def __init__(self):
+      Weapon.__init__(self)
+      self.enhancement = 2
+      self.damageDie = 'd4'
+      self.numDie = 1
+      self.critDamage = ''
+      self.damageType = 'str'
+      self.weaponType = 'dagger'
+      self.keywords = ['dagger','lightBlade']
 
 #at-will
 class SlyFlourish(Power):
