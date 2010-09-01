@@ -10,3 +10,9 @@ power/race/class, so you will have to write custom code to handle special cases.
 The eventual goal is to remove most of the tedium of arithmetic and power
 usage tracking from a D&D session. However, there are no plans to add a
 simulated dice roller, because rolling dice is fun, dammit.
+
+TODO:
+powers should check that their requirements are met (melee, ranged, etc)
+a way track power usage/availability and turn status
+add item powers
+

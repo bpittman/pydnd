@@ -66,9 +66,10 @@ class Character:
    def usePower(self,power,hand="main",output=True):
       if hand in self.equipped and power in self.powers:
          self.powers[power].use(self,self.equipped[hand])
-      if output:
+      if output and self.powers[power].weaponsOfDamage > 0:
          print "attack bonus:", self.powers[power].attackBonus
          print "normal damage:", self.powers[power].totalDamage
          print "max damage:", self.powers[power].maxDamage
          print "max+weap damage:", self.powers[power].maxPlusWeapon
          print "double max damage:", 2*self.powers[power].maxDamage
+

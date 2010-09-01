@@ -19,7 +19,27 @@ class Linder(Character):
       self.proficiency['handCrossbow'] = 2
       self.setLvl(11)
 
-      self.setPower(slyFlourish=SlyFlourish())
+      #at-wills
+      self.setPower(slyFlourish=SlyFlourish(),
+                    acrobaticStrike=AcrobaticStrike(),
+                    fleetingGhost=FleetingGhost())
+
+      #encounters
+      self.setPower(shadowJaunt=ShadowJaunt(),
+                    positioningStrike=PositioningStrike(),
+                    fadingStrike=FadingStrike(),
+                    jumpingBladeAssault=JumpingBladeAssault(),
+                    snapShot=SnapShot(),
+                    huntersQuarry=HuntersQuarry(),
+                    criticalOpportunity=CriticalOpportunity(),
+                    tumblingDodge=TumblingDodge(),
+                    combatTumbleset=CombatTumbleset())
+
+      #dailies
+      self.setPower(handspringAssault=HandspringAssault(),
+                    mockingStrike=MockingStrike(),
+                    aerialAssault=AerialAssault())
+
       self.setEquip(main=Misericorde())
 
 class Misericorde(Weapon):
@@ -32,9 +52,126 @@ class Misericorde(Weapon):
       self.damageType = 'str'
       self.keywords = ['dagger','lightBlade','radiant']
 
+#at-will
 class SlyFlourish(Power):
    def __init__(self):
       Power.__init__(self)
       self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 1
       self.abilityModDamage = ['dex','cha']
+      self.frequency = 'at-will'
 
+class AcrobaticStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 1
+      self.abilityModDamage = ['dex']
+      self.frequency = 'at-will'
+
+class FleetingGhost(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'at-will'
+      self.action = 'move'
+
+#encounter
+class PositioningStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'will'
+      self.weaponsOfDamage = 1
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
+class SnapShot(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 1
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+      self.action = 'minor'
+
+class FadingStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 1
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
+class JumpingBladeAssault(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC' #FIXME: or ref
+      self.weaponsOfDamage = 2
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
+class HuntersQuarry(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'minor'
+
+class ShadowJaunt(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'move'
+
+class CriticalOpportunity(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 3
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
+class TumblingDodge(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'interrupt'
+
+class CombatTumbleset(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'move'
+
+#daily
+class HandspringAssault(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 3
+      self.abilityModDamage = ['dex']
+      self.frequency = 'daily'
+
+class MockingStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'will'
+      self.weaponsOfDamage = 2
+      self.abilityModDamage = ['dex']
+      self.frequency = 'daily'
+
+class AerialAssault(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'ref'
+      self.weaponsOfDamage = 3
+      self.abilityModDamage = ['dex']
+      self.frequency = 'daily'
