@@ -51,6 +51,8 @@ class TestWeapon(unittest.TestCase):
 
       self.slyFlourish = Power()
       self.slyFlourish.attackType = 'dex'
+      self.slyFlourish.defenseType = 'AC'
+      self.slyFlourish.weaponsOfDamage = 1
       self.slyFlourish.abilityModDamage = ['dex','cha']
 
       self.linder.setEquip(main=self.misericorde)
