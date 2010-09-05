@@ -22,4 +22,6 @@ class MainWindow(QtGui.QMainWindow):
       power = str(power)
       self.character.usePower(power,output=False)
       self.ui.powerText.setText(self.character.powers[power].text())
-
+      imageName = 'gui/'+power+'.jpeg'
+      image = QtGui.QImage(imageName) if QtCore.QFileInfo(imageName).isReadable() else QtGui.QImage()
+      self.ui.powerImageLabel.setPixmap(QtGui.QPixmap.fromImage(image))
