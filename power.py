@@ -25,3 +25,12 @@ class Power:
          self.maxDamage = self.weaponsOfDamage*(perWeaponDamageBonus + int(weapon.damageDie[1:])*weapon.numDie)
          self.maxDamage += abilityWeaponBonus
          self.maxPlusWeapon = weaponString + '+' + str(self.maxDamage)
+
+   def text(self):
+      if not self.attackType: return 'no attack'
+      text = "attack bonus:" + str(self.attackBonus) + '\n'
+      text += "normal damage:" +  str(self.totalDamage) + '\n'
+      text += "max damage:" +  str(self.maxDamage) + '\n'
+      text += "max+weap damage:" +  str(self.maxPlusWeapon) + '\n'
+      text += "double max damage:" +  str(2*self.maxDamage) + '\n'
+      return text

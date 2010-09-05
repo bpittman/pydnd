@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="2">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -30,6 +30,13 @@
     </item>
     <item row="0" column="0">
      <widget class="QListWidget" name="powersList"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTextEdit" name="powerText">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
