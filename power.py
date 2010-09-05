@@ -27,7 +27,7 @@ class Power:
          self.maxPlusWeapon = weaponString + '+' + str(self.maxDamage)
 
    def text(self):
-      if not self.attackType: return 'no attack'
+      if not self.attackType: return ''
       text = "attack bonus:" + str(self.attackBonus) + '\n'
       text += "normal damage:" +  str(self.totalDamage) + '\n'
       text += "max damage:" +  str(self.maxDamage) + '\n'

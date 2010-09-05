@@ -20,6 +20,12 @@ class MainWindow(QtGui.QMainWindow):
 
    def displayPowerDetails(self,power):
       power = str(power)
+
+      if not power:
+         self.ui.powerText.setText('')
+         self.ui.powerImageLabel.setPixmap(QtGui.QPixmap.fromImage(QtGui.QImage()))
+         return
+
       self.character.usePower(power,output=False)
       self.ui.powerText.setText(self.character.powers[power].text())
       imageName = 'gui/'+power+'.jpeg'
