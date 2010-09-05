@@ -40,7 +40,11 @@ class Linder(Character):
                     mockingStrike=MockingStrike(),
                     aerialAssault=AerialAssault())
 
-      self.setEquip(main=Misericorde())
+      self.setWeapon(misericorde=Misericorde(),
+                     poisonedCrossbow=PoisonedCrossbow(),
+                     cloakedDagger=CloakedDagger())
+
+      self.setEquip(main='misericorde')
 
 class Misericorde(Weapon):
    def __init__(self):

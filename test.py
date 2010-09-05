@@ -55,7 +55,8 @@ class TestWeapon(unittest.TestCase):
       self.slyFlourish.weaponsOfDamage = 1
       self.slyFlourish.abilityModDamage = ['dex','cha']
 
-      self.linder.setEquip(main=self.misericorde)
+      self.linder.setWeapon(misericorde=self.misericorde)
+      self.linder.setEquip(main='misericorde')
       self.linder.setPower(slyFlourish=self.slyFlourish)
       self.linder.usePower("slyFlourish",output=False)
 

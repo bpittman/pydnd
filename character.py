@@ -30,6 +30,7 @@ class Character:
       self.proficiency = defaultdict(int)
       self.equipped = {}
       self.powers = {}
+      self.weapons = {}
 
    def setLvl(self,lvl):
       self.lvl = lvl
@@ -63,12 +64,16 @@ class Character:
       for power in kwargs:
          self.powers[power] = kwargs[power]
 
+   def setWeapon(self,**kwargs):
+      for weapon in kwargs:
+         self.weapons[weapon] = kwargs[weapon]
+
    def getPowers(self,frequency=['at-will','encounter','daily'], action=['standard','move','minor']):
       return [p for p in self.powers if self.powers[p].frequency in frequency and self.powers[p].action in action]
 
    def usePower(self,power,hand="main",output=True):
       if hand in self.equipped and power in self.powers:
-         self.powers[power].use(self,self.equipped[hand])
+         self.powers[power].use(self,self.weapons[self.equipped[hand]])
       if output and self.powers[power].weaponsOfDamage > 0:
          print "attack bonus:", self.powers[power].attackBonus
          print "normal damage:", self.powers[power].totalDamage
