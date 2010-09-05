@@ -63,6 +63,9 @@ class Character:
       for power in kwargs:
          self.powers[power] = kwargs[power]
 
+   def getPowers(self,frequency=['at-will','encounter','daily'], action=['standard','move','minor']):
+      return [p for p in self.powers if self.powers[p].frequency in frequency and self.powers[p].action in action]
+
    def usePower(self,power,hand="main",output=True):
       if hand in self.equipped and power in self.powers:
          self.powers[power].use(self,self.equipped[hand])
