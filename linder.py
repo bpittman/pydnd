@@ -198,3 +198,17 @@ class AerialAssault(Power):
       self.weaponsOfDamage = 3
       self.abilityModDamage = ['dex']
       self.frequency = 'daily'
+
+
+if __name__ == "__main__":
+   import sys
+   from PyQt4 import QtGui
+   import gui
+
+   app = QtGui.QApplication(sys.argv)
+
+   linder = Linder()
+
+   window = gui.MainWindow()
+   window.setCharacter(linder)
+   sys.exit(app.exec_())
