@@ -5,14 +5,8 @@ from power import Power
 
 class TestCharacter(unittest.TestCase):
    def setUp(self):
-      self.linder = Character()
-      self.linder.setAbilities(str=13, con=12, dex=20, int=11, wis=14, cha=21)
-      self.linder.setSkills(acrobatics=True, athletics=True, bluff=True,
-                       perception=True, stealth=True, streetwise=True,
-                       thievery=True)
-      self.linder.skill['diplomacy'].miscBonus = 2
-      self.linder.skill['insight'].miscBonus = 2
-      self.linder.setLvl(11)
+      import linder
+      self.linder = linder.Linder()
 
    def test_skill(self):
       self.assertEqual(self.linder.skill['stealth'].value(), 15)
@@ -29,42 +23,33 @@ class TestCharacter(unittest.TestCase):
       self.assertEqual(self.linder.abilityMod['wis'], 2)
       self.assertEqual(self.linder.abilityMod['cha'], 5)
 
-class TestWeapon(unittest.TestCase):
+class TestPowers(unittest.TestCase):
    def setUp(self):
-      self.linder = Character()
-      self.linder.setAbilities(str=13, con=12, dex=20, int=11, wis=14, cha=21)
-      self.linder.setSkills(acrobatics=True, athletics=True, bluff=True,
-                       perception=True, stealth=True, streetwise=True,
-                       thievery=True)
-      self.linder.skill['diplomacy'].miscBonus = 2
-      self.linder.skill['insight'].miscBonus = 2
-      self.linder.setLvl(11)
-      self.linder.proficiency['dagger'] = 4 #3 prof + 1 rogue class
-
-      self.misericorde = Weapon()
-      self.misericorde.enhancement = 3
-      self.misericorde.damageDie = 'd8'
-      self.misericorde.numDie = 1
-      self.misericorde.critDamage = '3d6'
-      self.misericorde.damageType = 'str'
-      self.misericorde.keywords = ['dagger','lightBlade','radiant']
-
-      self.slyFlourish = Power()
-      self.slyFlourish.attackType = 'dex'
-      self.slyFlourish.defenseType = 'AC'
-      self.slyFlourish.weaponsOfDamage = 1
-      self.slyFlourish.abilityModDamage = ['dex','cha']
-
-      self.linder.setWeapon(misericorde=self.misericorde)
-      self.linder.setEquip(main='misericorde')
-      self.linder.setPower(slyFlourish=self.slyFlourish)
-      self.linder.getPowerStats("slyFlourish",output=False)
+      import linder
+      self.linder = linder.Linder()
 
    def test_power_attack_bonus(self):
-      self.assertEqual(self.slyFlourish.attackBonus, 17)
-      self.assertEqual(self.slyFlourish.totalDamage, '1d8+14')
-      self.assertEqual(self.slyFlourish.maxDamage, 22)
-      self.assertEqual(self.slyFlourish.maxPlusWeapon, '1d8+22')
+      self.linder.getPowerStats('slyFlourish',output=False)
+      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 17)
+      self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+14')
+      self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, 22)
+      self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+22')
+
+   def test_encounter_availability(self):
+      self.assertTrue('positioningStrike' in self.linder.getPowers())
+      self.linder.powers['positioningStrike'].setUsed(True)
+      self.assertFalse('positioningStrike' in self.linder.getPowers())
+      self.linder.shortRest()
+      self.assertTrue('positioningStrike' in self.linder.getPowers())
+
+   def test_daily_availability(self):
+      self.assertTrue('aerialAssault' in self.linder.getPowers())
+      self.linder.powers['aerialAssault'].setUsed(True)
+      self.assertFalse('aerialAssault' in self.linder.getPowers())
+      self.linder.shortRest()
+      self.assertFalse('aerialAssault' in self.linder.getPowers())
+      self.linder.extendedRest()
+      self.assertTrue('aerialAssault' in self.linder.getPowers())
 
 if __name__ == '__main__':
     unittest.main()
