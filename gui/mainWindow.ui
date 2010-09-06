@@ -159,16 +159,6 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="1" rowspan="6">
-     <widget class="QListWidget" name="powersList">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="2" rowspan="6">
      <widget class="QFrame" name="powerFrame">
       <property name="sizePolicy">
@@ -293,6 +283,21 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="0" column="1" rowspan="6">
+     <widget class="QTreeWidget" name="powersTree">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <column>
+       <property name="text">
+        <string>Powers</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>

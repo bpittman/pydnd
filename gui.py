@@ -8,7 +8,7 @@ class MainWindow(QtGui.QMainWindow):
       self.ui.show()
       self.character = None
 
-      self.connect(self.ui.powersList, QtCore.SIGNAL('currentTextChanged(QString)'), self.displayPowerDetails)
+      self.connect(self.ui.powersTree, QtCore.SIGNAL('itemSelectionChanged()'), self.displayPowerDetails)
 
       self.connect(self.ui.atWillCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
       self.connect(self.ui.encounterCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
@@ -36,7 +36,12 @@ class MainWindow(QtGui.QMainWindow):
 
    def loadPowers(self):
       if not self.character: return
-      self.ui.powersList.clear()
+      self.ui.powersTree.clear()
+
+      atWills = QtGui.QTreeWidgetItem(['at-will'])
+      encounters = QtGui.QTreeWidgetItem(['encounter'])
+      dailies = QtGui.QTreeWidgetItem(['daily'])
+      self.ui.powersTree.addTopLevelItems([atWills,encounters,dailies])
 
       frequency = []
       if self.ui.atWillCheck.isChecked(): frequency.append('at-will')
@@ -53,7 +58,13 @@ class MainWindow(QtGui.QMainWindow):
       if self.ui.usedCheck.isChecked(): usage.append('used')
 
       for power in self.character.getPowers(frequency=frequency,action=action,usage=usage):
-         self.ui.powersList.addItem(power)
+         if self.character.powers[power].frequency == 'at-will':
+            QtGui.QTreeWidgetItem(atWills,[power])
+         if self.character.powers[power].frequency == 'encounter':
+            QtGui.QTreeWidgetItem(encounters,[power])
+         if self.character.powers[power].frequency == 'daily':
+            QtGui.QTreeWidgetItem(dailies,[power])
+      self.ui.powersTree.expandAll()
 
    def usePower(self):
       item = self.ui.powersList.currentItem()
@@ -92,10 +103,12 @@ class MainWindow(QtGui.QMainWindow):
       if item:
          self.displayPowerDetails(item.text())
 
-   def displayPowerDetails(self,power):
-      power = str(power)
+   def displayPowerDetails(self):
+      selection = self.ui.powersTree.selectedItems()
+      if len(selection):
+         power = str(selection[0].text(0))
 
-      if not power:
+      if not power or power not in self.character.powers:
          self.ui.powerText.setText('')
          self.ui.powerImageLabel.setPixmap(QtGui.QPixmap.fromImage(QtGui.QImage()))
          return
