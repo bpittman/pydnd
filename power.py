@@ -7,8 +7,9 @@ class Power:
       self.defenseType = ''
       self.weaponsOfDamage = 0
       self.abilityModDamage = []
+      self.used = False
 
-   def use(self,char, weapon):
+   def generateStats(self,char, weapon):
       if self.attackType:
          self.attackBonus = char.lvl/2 + char.abilityMod[self.attackType]
          self.attackBonus += char.proficiency[weapon.weaponType] + weapon.enhancement
@@ -34,3 +35,6 @@ class Power:
       text += "max+weap damage:" +  str(self.maxPlusWeapon) + '\n'
       text += "double max damage:" +  str(2*self.maxDamage) + '\n'
       return text
+
+   def setUsed(self, used):
+      self.used = used if not self.frequency is 'at-will' else False

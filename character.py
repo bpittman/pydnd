@@ -68,16 +68,32 @@ class Character:
       for weapon in kwargs:
          self.weapons[weapon] = kwargs[weapon]
 
-   def getPowers(self,frequency=['at-will','encounter','daily'], action=['standard','move','minor']):
-      return [p for p in self.powers if self.powers[p].frequency in frequency and self.powers[p].action in action]
+   def getPowers(self,frequency=['at-will','encounter','daily'],
+                      action=['standard','move','minor'],
+                      usage=['unused']):
+      l = []
+      for p in self.powers:
+         if not self.powers[p].frequency in frequency: continue
+         if not self.powers[p].action in action: continue
+         if self.powers[p].used and 'used' not in usage: continue
+         if not self.powers[p].used and 'unused' not in usage: continue
+         l.append(p)
+      return l
 
-   def usePower(self,power,hand="main",output=True):
+   def getPowerStats(self,power,hand="main",output=True):
       if hand in self.equipped and power in self.powers:
-         self.powers[power].use(self,self.weapons[self.equipped[hand]])
+         self.powers[power].generateStats(self,self.weapons[self.equipped[hand]])
       if output and self.powers[power].weaponsOfDamage > 0:
          print "attack bonus:", self.powers[power].attackBonus
          print "normal damage:", self.powers[power].totalDamage
          print "max damage:", self.powers[power].maxDamage
          print "max+weap damage:", self.powers[power].maxPlusWeapon
          print "double max damage:", 2*self.powers[power].maxDamage
+
+   def shortRest(self):
+      for p in self.powers:
+         if self.powers[p].frequency is 'encounter': self.powers[p].setUsed(False)
+
+   def extendedRest(self):
+      for p in self.powers: self.powers[p].setUsed(False)
 
