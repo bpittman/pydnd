@@ -18,7 +18,7 @@ class MainWindow(QtGui.QMainWindow):
       self.connect(self.ui.moveCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
       self.connect(self.ui.minorCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
 
-      self.connect(self.ui.weaponCombo,QtCore.SIGNAL('currentIndexChanged(QString)'),self.equipWeapon)
+      self.connect(self.ui.weaponCombo,QtCore.SIGNAL('activated(QString)'),self.equipWeapon)
 
    def setCharacter(self,character):
       self.character = character
