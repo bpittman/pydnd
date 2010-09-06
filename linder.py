@@ -5,7 +5,7 @@ from power import Power
 class Linder(Character):
    def __init__(self):
       Character.__init__(self)
-      self.setAbilities(str=13, con=12, dex=20, int=11, wis=14, cha=21)
+      self.setAbilities(str=13, con=12, dex=24, int=11, wis=15, cha=22)
 
       self.setSkills(acrobatics=True, athletics=True, bluff=True,
                        perception=True, stealth=True, streetwise=True,
@@ -15,9 +15,12 @@ class Linder(Character):
       self.skill['diplomacy'].miscBonus = 2
       self.skill['insight'].miscBonus = 2
 
+      #jet black stone bonus
+      self.skill['stealth'].miscBonus = 4
+
       self.proficiency['dagger'] = 3+1 #proficient + rogue class bonus
       self.proficiency['handCrossbow'] = 2
-      self.setLvl(11)
+      self.setLvl(14)
 
       #at-wills
       self.setPower(slyFlourish=SlyFlourish(),
@@ -26,19 +29,20 @@ class Linder(Character):
 
       #encounters
       self.setPower(shadowJaunt=ShadowJaunt(),
-                    positioningStrike=PositioningStrike(),
                     fadingStrike=FadingStrike(),
                     jumpingBladeAssault=JumpingBladeAssault(),
                     snapShot=SnapShot(),
-                    huntersQuarry=HuntersQuarry(),
                     criticalOpportunity=CriticalOpportunity(),
                     tumblingDodge=TumblingDodge(),
-                    combatTumbleset=CombatTumbleset())
+                    combatTumbleset=CombatTumbleset(),
+                    tornadoStrike=TornadoStrike(),
+                    oathOfEnmity=OathOfEnmity())
 
       #dailies
       self.setPower(handspringAssault=HandspringAssault(),
-                    mockingStrike=MockingStrike(),
-                    aerialAssault=AerialAssault())
+                    aerialAssault=AerialAssault(),
+                    trickStrike=TrickStrike(),
+                    badIdeaFriend=BadIdeaFriend())
 
       self.setWeapon(misericorde=Misericorde(),
                      poisonedCrossbow=PoisonedCrossbow(),
@@ -105,15 +109,6 @@ class FleetingGhost(Power):
       self.action = 'move'
 
 #encounter
-class PositioningStrike(Power):
-   def __init__(self):
-      Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'will'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['dex']
-      self.frequency = 'encounter'
-
 class SnapShot(Power):
    def __init__(self):
       Power.__init__(self)
@@ -142,7 +137,7 @@ class JumpingBladeAssault(Power):
       self.abilityModDamage = ['dex']
       self.frequency = 'encounter'
 
-class HuntersQuarry(Power):
+class OathOfEnmity(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'encounter'
@@ -175,6 +170,15 @@ class CombatTumbleset(Power):
       self.frequency = 'encounter'
       self.action = 'move'
 
+class TornadoStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 2
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
 #daily
 class HandspringAssault(Power):
    def __init__(self):
@@ -182,15 +186,6 @@ class HandspringAssault(Power):
       self.attackType = 'dex'
       self.defenseType = 'AC'
       self.weaponsOfDamage = 3
-      self.abilityModDamage = ['dex']
-      self.frequency = 'daily'
-
-class MockingStrike(Power):
-   def __init__(self):
-      Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'will'
-      self.weaponsOfDamage = 2
       self.abilityModDamage = ['dex']
       self.frequency = 'daily'
 
@@ -203,6 +198,20 @@ class AerialAssault(Power):
       self.abilityModDamage = ['dex']
       self.frequency = 'daily'
 
+class TrickStrike(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 3
+      self.abilityModDamage = ['dex']
+      self.frequency = 'daily'
+
+class BadIdeaFriend(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'daily'
+      self.action = 'interrupt'
 
 if __name__ == "__main__":
    import sys

@@ -9,19 +9,19 @@ class TestCharacter(unittest.TestCase):
       self.linder = linder.Linder()
 
    def test_skill(self):
-      self.assertEqual(self.linder.skill['stealth'].value(), 15)
-      self.assertEqual(self.linder.skill['athletics'].value(), 11)
-      self.assertEqual(self.linder.skill['arcana'].value(), 5)
-      self.assertEqual(self.linder.skill['athletics'].value(), 11)
-      self.assertEqual(self.linder.skill['insight'].value(), 9)
+      self.assertEqual(self.linder.skill['stealth'].value(), 23)
+      self.assertEqual(self.linder.skill['athletics'].value(), 13)
+      self.assertEqual(self.linder.skill['arcana'].value(), 7)
+      self.assertEqual(self.linder.skill['acrobatics'].value(), 19)
+      self.assertEqual(self.linder.skill['insight'].value(), 11)
 
    def test_ability_mod(self):
       self.assertEqual(self.linder.abilityMod['str'], 1)
       self.assertEqual(self.linder.abilityMod['con'], 1)
-      self.assertEqual(self.linder.abilityMod['dex'], 5)
+      self.assertEqual(self.linder.abilityMod['dex'], 7)
       self.assertEqual(self.linder.abilityMod['int'], 0)
       self.assertEqual(self.linder.abilityMod['wis'], 2)
-      self.assertEqual(self.linder.abilityMod['cha'], 5)
+      self.assertEqual(self.linder.abilityMod['cha'], 6)
 
 class TestPowers(unittest.TestCase):
    def setUp(self):
@@ -30,17 +30,17 @@ class TestPowers(unittest.TestCase):
 
    def test_power_attack_bonus(self):
       self.linder.getPowerStats('slyFlourish',output=False)
-      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 17)
-      self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+14')
-      self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, 22)
-      self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+22')
+      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 21)
+      self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+17')
+      self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, 25)
+      self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+25')
 
    def test_encounter_availability(self):
-      self.assertTrue('positioningStrike' in self.linder.getPowers())
-      self.linder.powers['positioningStrike'].setUsed(True)
-      self.assertFalse('positioningStrike' in self.linder.getPowers())
+      self.assertTrue('tornadoStrike' in self.linder.getPowers())
+      self.linder.powers['tornadoStrike'].setUsed(True)
+      self.assertFalse('tornadoStrike' in self.linder.getPowers())
       self.linder.shortRest()
-      self.assertTrue('positioningStrike' in self.linder.getPowers())
+      self.assertTrue('tornadoStrike' in self.linder.getPowers())
 
    def test_daily_availability(self):
       self.assertTrue('aerialAssault' in self.linder.getPowers())
