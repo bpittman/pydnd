@@ -11,8 +11,12 @@ The eventual goal is to remove most of the tedium of arithmetic and power
 usage tracking from a D&D session. However, there are no plans to add a
 simulated dice roller, because rolling dice is fun, dammit.
 
+Dependencies:
+Qt4
+PyQt4
+
 TODO:
 powers should check that their requirements are met (melee, ranged, etc)
-a way track power usage/availability and turn status
+a way to track turn status (standard/move/minor availability)
 add item powers
 
