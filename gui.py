@@ -69,15 +69,15 @@ class MainWindow(QtGui.QMainWindow):
       self.ui.powersTree.expandAll()
 
    def usePower(self):
-      item = self.ui.powersList.currentItem()
-      if item and str(item.text()) in self.character.powers:
-         self.character.powers[str(item.text())].setUsed(True)
+      power = self.getCurrentPower()
+      if power:
+         self.character.powers[power].setUsed(True)
          self.loadPowers()
 
    def unusePower(self):
-      item = self.ui.powersList.currentItem()
-      if item and str(item.text()) in self.character.powers:
-         self.character.powers[str(item.text())].setUsed(False)
+      power = self.getCurrentPower()
+      if power:
+         self.character.powers[power].setUsed(False)
          self.loadPowers()
 
    def shortRest(self):
@@ -97,20 +97,21 @@ class MainWindow(QtGui.QMainWindow):
          if index >= 0:
             self.ui.weaponCombo.setCurrentIndex(index)
 
+   def getCurrentPower(self):
+      selection = self.ui.powersTree.selectedItems()
+      if len(selection):
+         power = str(selection[0].text(0))
+         return power if power in self.character.powers else None
+
    def equipWeapon(self,weapon):
       if not self.character or not weapon: return
       weapon = str(weapon)
       self.character.setEquip(main=weapon)
-      item = self.ui.powersList.currentItem()
-      if item:
-         self.displayPowerDetails(item.text())
+      self.displayPowerDetails()
 
    def displayPowerDetails(self):
-      selection = self.ui.powersTree.selectedItems()
-      if len(selection):
-         power = str(selection[0].text(0))
-
-      if not power or power not in self.character.powers:
+      power = self.getCurrentPower()
+      if not power:
          self.ui.powerText.setText('')
          self.ui.powerImageLabel.setPixmap(QtGui.QPixmap.fromImage(QtGui.QImage()))
          return
