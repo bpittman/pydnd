@@ -69,7 +69,7 @@ class Character:
          self.weapons[weapon] = kwargs[weapon]
 
    def getPowers(self,frequency=['at-will','encounter','daily'],
-                      action=['standard','move','minor'],
+                      action=['standard','move','minor','interrupt'],
                       usage=['unused']):
       l = []
       for p in self.powers:

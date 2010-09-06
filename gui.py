@@ -17,6 +17,7 @@ class MainWindow(QtGui.QMainWindow):
       self.connect(self.ui.standardCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
       self.connect(self.ui.moveCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
       self.connect(self.ui.minorCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
+      self.connect(self.ui.interruptCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
 
       self.connect(self.ui.usedCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
       self.connect(self.ui.unusedCheck, QtCore.SIGNAL('stateChanged(int)'), self.loadPowers)
@@ -52,6 +53,7 @@ class MainWindow(QtGui.QMainWindow):
       if self.ui.standardCheck.isChecked(): action.append('standard')
       if self.ui.moveCheck.isChecked(): action.append('move')
       if self.ui.minorCheck.isChecked(): action.append('minor')
+      if self.ui.interruptCheck.isChecked(): action.append('interrupt')
 
       usage = []
       if self.ui.unusedCheck.isChecked(): usage.append('unused')
