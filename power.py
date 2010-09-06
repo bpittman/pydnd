@@ -37,4 +37,4 @@ class Power:
       return text
 
    def setUsed(self, used):
-      self.used = used if not self.frequency is 'at-will' else False
+      self.used = used if not self.frequency == 'at-will' else False
