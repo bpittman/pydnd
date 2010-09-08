@@ -25,7 +25,7 @@ class Power:
          #house rules crit system
          self.maxDamage = self.weaponsOfDamage*(perWeaponDamageBonus + int(weapon.damageDie[1:])*weapon.numDie)
          self.maxDamage += abilityWeaponBonus
-         self.maxPlusWeapon = weaponString + '+' + str(self.maxDamage)
+         self.maxPlusWeapon = weaponString + '+' + str(self.maxDamage+perWeaponDamageBonus)
 
    def text(self):
       if not self.attackType: return ''
