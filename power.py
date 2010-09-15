@@ -14,18 +14,19 @@ class Power:
          self.attackBonus = char.lvl/2 + char.abilityMod[self.attackType]
          self.attackBonus += char.proficiency[weapon.weaponType] + weapon.enhancement
 
-         perWeaponDamageBonus = char.abilityMod[weapon.damageType] + weapon.enhancement
+         weaponTypeBonus = char.abilityMod[weapon.damageType]
+         perWeaponDamageBonus = weapon.enhancement
          weaponDamageBonus = self.weaponsOfDamage*(perWeaponDamageBonus)
          abilityWeaponBonus = sum([char.abilityMod[mod] for mod in self.abilityModDamage])
 
          weaponString = str(self.weaponsOfDamage*weapon.numDie) + weapon.damageDie
 
-         self.totalDamage =  weaponString + '+' + str(weaponDamageBonus+abilityWeaponBonus)
+         self.totalDamage =  weaponString + '+' + str(weaponDamageBonus+abilityWeaponBonus + weaponTypeBonus)
 
          #house rules crit system
          self.maxDamage = self.weaponsOfDamage*(perWeaponDamageBonus + int(weapon.damageDie[1:])*weapon.numDie)
-         self.maxDamage += abilityWeaponBonus
-         self.maxPlusWeapon = weaponString + '+' + str(self.maxDamage+perWeaponDamageBonus)
+         self.maxDamage += abilityWeaponBonus + char.abilityMod[weapon.damageType]
+         self.maxPlusWeapon = '1'+weapon.damageDie + '+' + str(self.maxDamage+perWeaponDamageBonus)
 
    def text(self):
       if not self.attackType: return ''

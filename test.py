@@ -33,7 +33,7 @@ class TestPowers(unittest.TestCase):
       self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 21)
       self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+17')
       self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, 25)
-      self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+25')
+      self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+28')
 
    def test_encounter_availability(self):
       self.assertTrue('tornadoStrike' in self.linder.getPowers())
