@@ -20,7 +20,7 @@ class Linder(Character):
 
       self.proficiency['dagger'] = 3+1 #proficient + rogue class bonus
       self.proficiency['handCrossbow'] = 2
-      self.setLvl(14)
+      self.setLvl(15)
 
       #at-wills
       self.setPower(slyFlourish=SlyFlourish(),
@@ -39,7 +39,7 @@ class Linder(Character):
                     oathOfEnmity=OathOfEnmity())
 
       #dailies
-      self.setPower(handspringAssault=HandspringAssault(),
+      self.setPower(slayingStrike=SlayingStrike(),
                     aerialAssault=AerialAssault(),
                     trickStrike=TrickStrike(),
                     badIdeaFriend=BadIdeaFriend())
@@ -180,13 +180,13 @@ class TornadoStrike(Power):
       self.frequency = 'encounter'
 
 #daily
-class HandspringAssault(Power):
+class SlayingStrike(Power):
    def __init__(self):
       Power.__init__(self)
       self.attackType = 'dex'
       self.defenseType = 'AC'
-      self.weaponsOfDamage = 3
-      self.abilityModDamage = ['dex']
+      self.weaponsOfDamage = 5
+      self.abilityModDamage = ['dex','str']
       self.frequency = 'daily'
 
 class AerialAssault(Power):

@@ -35,6 +35,13 @@ class TestPowers(unittest.TestCase):
       self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, 25)
       self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+28')
 
+   def test_multiweapon_power_bonus(self):
+      self.linder.getPowerStats('slayingStrike',output=False)
+      self.assertEqual(self.linder.powers['slayingStrike'].attackBonus, 21)
+      self.assertEqual(self.linder.powers['slayingStrike'].totalDamage, '5d8+24')
+      self.assertEqual(self.linder.powers['slayingStrike'].maxDamage, 64)
+      self.assertEqual(self.linder.powers['slayingStrike'].maxPlusWeapon, '1d8+67')
+
    def test_encounter_availability(self):
       self.assertTrue('tornadoStrike' in self.linder.getPowers())
       self.linder.powers['tornadoStrike'].setUsed(True)
