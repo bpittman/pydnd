@@ -18,23 +18,27 @@ class Power:
          perWeaponDamageBonus = weapon.enhancement
          weaponDamageBonus = self.weaponsOfDamage*(perWeaponDamageBonus)
          abilityWeaponBonus = sum([char.abilityMod[mod] for mod in self.abilityModDamage])
+         self.extraCrit = ''
+         if char.extraCrit: self.extraCrit+= char.extraCrit + '+'
+         if weapon.extraCrit: self.extraCrit+= weapon.extraCrit + '+'
 
          weaponString = str(self.weaponsOfDamage*weapon.numDie) + weapon.damageDie
-
-         self.totalDamage =  weaponString + '+' + str(weaponDamageBonus+abilityWeaponBonus + weaponTypeBonus)
+         self.numericBonus = weaponDamageBonus + abilityWeaponBonus + weaponTypeBonus
+         self.totalDamage =  weaponString + '+' + str(self.numericBonus)
 
          #house rules crit system
-         self.maxDamage = self.weaponsOfDamage*(perWeaponDamageBonus + int(weapon.damageDie[1:])*weapon.numDie)
-         self.maxDamage += abilityWeaponBonus + char.abilityMod[weapon.damageType]
-         self.maxPlusWeapon = '1'+weapon.damageDie + '+' + str(self.maxDamage+perWeaponDamageBonus)
+         maxDamageValue = self.weaponsOfDamage*(int(weapon.damageDie[1:])*weapon.numDie) + self.numericBonus
+         self.maxDamage = self.extraCrit + str(maxDamageValue)
+         self.doubleMaxDamage = self.extraCrit + str(2*maxDamageValue)
+         self.maxPlusWeapon = weaponString + '+' + self.extraCrit + str(maxDamageValue+self.numericBonus)
 
    def text(self):
       if not self.attackType: return ''
       text = "attack bonus:" + str(self.attackBonus) + '\n'
       text += "normal damage:" +  str(self.totalDamage) + '\n'
-      text += "max damage:" +  str(self.maxDamage) + '\n'
+      text += "max damage:" + str(self.maxDamage) + '\n'
       text += "max+weap damage:" +  str(self.maxPlusWeapon) + '\n'
-      text += "double max damage:" +  str(2*self.maxDamage) + '\n'
+      text += "double max damage:" + str(self.doubleMaxDamage) + '\n'
       return text
 
    def setUsed(self, used):

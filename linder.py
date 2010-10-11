@@ -15,6 +15,9 @@ class Linder(Character):
       self.skill['diplomacy'].miscBonus = 2
       self.skill['insight'].miscBonus = 2
 
+      #Devastating Critical feat
+      self.extraCrit = '1d10'
+
       #jet black stone bonus
       self.skill['stealth'].miscBonus = 4
 
@@ -60,6 +63,7 @@ class Misericorde(Weapon):
       self.damageType = 'str'
       self.weaponType = 'dagger'
       self.keywords = ['dagger','lightBlade','radiant']
+      self.extraCrit = '3d6'
 
 class PoisonedCrossbow(Weapon):
    def __init__(self):
@@ -71,6 +75,7 @@ class PoisonedCrossbow(Weapon):
       self.damageType = 'dex'
       self.weaponType = 'handCrossbow'
       self.keywords = ['handCrossbow','ranged']
+      self.extraCrit = '1d6'
 
 class CloakedDagger(Weapon):
    def __init__(self):
@@ -82,6 +87,7 @@ class CloakedDagger(Weapon):
       self.damageType = 'str'
       self.weaponType = 'dagger'
       self.keywords = ['dagger','lightBlade']
+      self.extraCrit = '2d6'
 
 #at-will
 class SlyFlourish(Power):

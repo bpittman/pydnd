@@ -7,3 +7,4 @@ class Weapon:
       self.damageType = 'str'
       self.weaponType = 'dagger'
       self.keywords = ['dagger', 'lightBlade']
+      self.critBonus = ''
