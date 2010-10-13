@@ -23,18 +23,20 @@ class Linder(Character):
 
       self.proficiency['dagger'] = 3+1 #proficient + rogue class bonus
       self.proficiency['handCrossbow'] = 2
-      self.setLvl(15)
+      self.setLvl(17)
 
       #at-wills
       self.setPower(slyFlourish=SlyFlourish(),
-                    acrobaticStrike=AcrobaticStrike(),
-                    fleetingGhost=FleetingGhost())
+                    acrobaticStrike=AcrobaticStrike())
 
       #encounters
       self.setPower(shadowJaunt=ShadowJaunt(),
                     fadingStrike=FadingStrike(),
                     jumpingBladeAssault=JumpingBladeAssault(),
-                    snapShot=SnapShot(),
+                    escapeArtistsGambit=EscapeArtistsGambit(),
+                    leapingDodge=LeapingDodge(),
+                    sneakInTheAttack=SneakInTheAttack(),
+                    rockyIVPunch=RockyIVPunch(),
                     criticalOpportunity=CriticalOpportunity(),
                     tumblingDodge=TumblingDodge(),
                     combatTumbleset=CombatTumbleset(),
@@ -108,23 +110,7 @@ class AcrobaticStrike(Power):
       self.abilityModDamage = ['dex']
       self.frequency = 'at-will'
 
-class FleetingGhost(Power):
-   def __init__(self):
-      Power.__init__(self)
-      self.frequency = 'at-will'
-      self.action = 'move'
-
 #encounter
-class SnapShot(Power):
-   def __init__(self):
-      Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['dex']
-      self.frequency = 'encounter'
-      self.action = 'minor'
-
 class FadingStrike(Power):
    def __init__(self):
       Power.__init__(self)
@@ -184,6 +170,33 @@ class TornadoStrike(Power):
       self.weaponsOfDamage = 2
       self.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+
+class LeapingDodge(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'interrupt'
+
+class EscapeArtistsGambit(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 2
+      self.abilityModDamage = ['dex']
+      self.frequency = 'encounter'
+
+class SneakInTheAttack(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'minor'
+
+class RockyIVPunch(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.action = 'minor'
 
 #daily
 class SlayingStrike(Power):

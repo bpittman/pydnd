@@ -9,11 +9,11 @@ class TestCharacter(unittest.TestCase):
       self.linder = linder.Linder()
 
    def test_skill(self):
-      self.assertEqual(self.linder.skill['stealth'].value(), 23)
-      self.assertEqual(self.linder.skill['athletics'].value(), 13)
-      self.assertEqual(self.linder.skill['arcana'].value(), 7)
-      self.assertEqual(self.linder.skill['acrobatics'].value(), 19)
-      self.assertEqual(self.linder.skill['insight'].value(), 11)
+      self.assertEqual(self.linder.skill['stealth'].value(), 24)
+      self.assertEqual(self.linder.skill['athletics'].value(), 14)
+      self.assertEqual(self.linder.skill['arcana'].value(), 8)
+      self.assertEqual(self.linder.skill['acrobatics'].value(), 20)
+      self.assertEqual(self.linder.skill['insight'].value(), 12)
 
    def test_ability_mod(self):
       self.assertEqual(self.linder.abilityMod['str'], 1)
@@ -30,14 +30,14 @@ class TestPowers(unittest.TestCase):
 
    def test_power_attack_bonus(self):
       self.linder.getPowerStats('slyFlourish',output=False)
-      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 21)
+      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 22)
       self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+17')
       self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, '1d10+3d6+25')
       self.assertEqual(self.linder.powers['slyFlourish'].maxPlusWeapon, '1d8+1d10+3d6+42')
 
    def test_multiweapon_power_bonus(self):
       self.linder.getPowerStats('slayingStrike',output=False)
-      self.assertEqual(self.linder.powers['slayingStrike'].attackBonus, 21)
+      self.assertEqual(self.linder.powers['slayingStrike'].attackBonus, 22)
       self.assertEqual(self.linder.powers['slayingStrike'].totalDamage, '5d8+24')
       self.assertEqual(self.linder.powers['slayingStrike'].maxDamage, '1d10+3d6+64')
       self.assertEqual(self.linder.powers['slayingStrike'].maxPlusWeapon, '5d8+1d10+3d6+88')
