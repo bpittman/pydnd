@@ -34,7 +34,7 @@ class Linder(Character):
                     fadingStrike=FadingStrike(),
                     jumpingBladeAssault=JumpingBladeAssault(),
                     escapeArtistsGambit=EscapeArtistsGambit(),
-                    leapingDodge=LeapingDodge(),
+                    cleverMove=CleverMove(),
                     sneakInTheAttack=SneakInTheAttack(),
                     rockyIVPunch=RockyIVPunch(),
                     criticalOpportunity=CriticalOpportunity(),
@@ -51,7 +51,8 @@ class Linder(Character):
 
       self.setWeapon(misericorde=Misericorde(),
                      poisonedCrossbow=PoisonedCrossbow(),
-                     cloakedDagger=CloakedDagger())
+                     cloakedDagger=CloakedDagger(),
+                     unarmed=Unarmed())
 
       self.setEquip(main='misericorde')
 
@@ -90,6 +91,18 @@ class CloakedDagger(Weapon):
       self.weaponType = 'dagger'
       self.keywords = ['dagger','lightBlade']
       self.extraCrit = '2d6'
+
+class Unarmed(Weapon):
+   def __init__(self):
+      Weapon.__init__(self)
+      self.enhancement = 0
+      self.damageDie = 'd4'
+      self.numDie = 1
+      self.critDamage = ''
+      self.damageType = 'str'
+      self.weaponType = 'fist'
+      self.keywords = ['unarmed']
+      self.extraCrit = ''
 
 #at-will
 class SlyFlourish(Power):
@@ -171,7 +184,7 @@ class TornadoStrike(Power):
       self.abilityModDamage = ['dex']
       self.frequency = 'encounter'
 
-class LeapingDodge(Power):
+class CleverMove(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'encounter'
@@ -195,6 +208,9 @@ class SneakInTheAttack(Power):
 class RockyIVPunch(Power):
    def __init__(self):
       Power.__init__(self)
+      self.attackType = 'dex'
+      self.defenseType = 'ref'
+      self.weaponsOfDamage = 0
       self.frequency = 'encounter'
       self.action = 'minor'
 
