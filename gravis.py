@@ -2,7 +2,7 @@ from character import Character
 from weapon import Weapon
 from power import Power
 
-class Doctor(Character):
+class Gravis(Character):
    def __init__(self):
       Character.__init__(self)
       self.setAbilities(str=12, con=10, dex=10, int=12, wis=17, cha=16)
@@ -12,6 +12,13 @@ class Doctor(Character):
 
       #background trait
       self.skill['insight'].miscBonus = 2
+
+      #armor penalties
+      self.skill['acrobatics'].miscBonus = -1
+      self.skill['athletics'].miscBonus = -1
+      self.skill['endurance'].miscBonus = -1
+      self.skill['stealth'].miscBonus = -1
+      self.skill['thievery'].miscBonus = -1
 
       #proficiencies (only bothering with relevant ones)
       self.proficiency['staff'] = 2
@@ -97,8 +104,8 @@ if __name__ == "__main__":
 
    app = QtGui.QApplication(sys.argv)
 
-   doctor = Doctor()
+   gravis = Gravis()
 
    window = gui.MainWindow()
-   window.setCharacter(doctor)
+   window.setCharacter(gravis)
    sys.exit(app.exec_())

@@ -3,7 +3,7 @@ from character import Character
 from weapon import Weapon
 from power import Power
 
-class TestCharacter(unittest.TestCase):
+class TestLinder(unittest.TestCase):
    def setUp(self):
       import linder
       self.linder = linder.Linder()
@@ -22,6 +22,26 @@ class TestCharacter(unittest.TestCase):
       self.assertEqual(self.linder.abilityMod['int'], 0)
       self.assertEqual(self.linder.abilityMod['wis'], 2)
       self.assertEqual(self.linder.abilityMod['cha'], 6)
+
+class TestGravis(unittest.TestCase):
+   def setUp(self):
+      import gravis
+      self.gravis = gravis.Gravis()
+
+   def test_skill(self):
+      self.assertEqual(self.gravis.skill['stealth'].value(), -1)
+      self.assertEqual(self.gravis.skill['athletics'].value(), 0)
+      self.assertEqual(self.gravis.skill['arcana'].value(), 6)
+      self.assertEqual(self.gravis.skill['heal'].value(), 8)
+      self.assertEqual(self.gravis.skill['insight'].value(), 10)
+
+   def test_ability_mod(self):
+      self.assertEqual(self.gravis.abilityMod['str'], 1)
+      self.assertEqual(self.gravis.abilityMod['con'], 0)
+      self.assertEqual(self.gravis.abilityMod['dex'], 0)
+      self.assertEqual(self.gravis.abilityMod['int'], 1)
+      self.assertEqual(self.gravis.abilityMod['wis'], 3)
+      self.assertEqual(self.gravis.abilityMod['cha'], 3)
 
 class TestPowers(unittest.TestCase):
    def setUp(self):
