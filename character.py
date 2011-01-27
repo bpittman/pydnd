@@ -31,7 +31,7 @@ class Character:
       self.equipped = {}
       self.powers = {}
       self.weapons = {}
-      self.critBonus = ''
+      self.extraCrit = ''
 
    def setLvl(self,lvl):
       self.lvl = lvl
