@@ -7,7 +7,8 @@ class Power:
       self.defenseType = ''
       self.weaponsOfDamage = 0
       self.abilityModDamage = []
-      self.used = False
+      self.usesRemaining = 1
+      self.maxUses = 1
 
    def generateStats(self,char, weapon):
       if self.attackType:
@@ -28,6 +29,9 @@ class Power:
          maxDamageValue = self.weaponsOfDamage*(int(weapon.damageDie[1:])*weapon.numDie) + self.numericBonus
          self.maxDamage = self.extraCrit + str(maxDamageValue)
 
+   def available(self):
+      return self.usesRemaining > 0
+
    def text(self):
       if not self.attackType: return ''
       text = "attack bonus:" + str(self.attackBonus) + '\n'
@@ -36,4 +40,8 @@ class Power:
       return text
 
    def setUsed(self, used):
-      self.used = used if not self.frequency == 'at-will' else False
+      if self.frequency == 'at-will': return
+      if used:
+         self.usesRemaining = max(self.usesRemaining-1,0)
+      else:
+         self.usesRemaining = self.maxUses

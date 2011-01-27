@@ -76,8 +76,8 @@ class Character:
       for p in self.powers:
          if not self.powers[p].frequency in frequency: continue
          if not self.powers[p].action in action: continue
-         if self.powers[p].used and 'used' not in usage: continue
-         if not self.powers[p].used and 'unused' not in usage: continue
+         if not self.powers[p].available() and 'used' not in usage: continue
+         if self.powers[p].available() and 'unused' not in usage: continue
          l.append(p)
       return l
 

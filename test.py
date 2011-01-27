@@ -43,7 +43,7 @@ class TestGravis(unittest.TestCase):
       self.assertEqual(self.gravis.abilityMod['wis'], 3)
       self.assertEqual(self.gravis.abilityMod['cha'], 3)
 
-class TestPowers(unittest.TestCase):
+class TestLinderPowers(unittest.TestCase):
    def setUp(self):
       import linder
       self.linder = linder.Linder()
@@ -75,6 +75,20 @@ class TestPowers(unittest.TestCase):
       self.assertFalse('aerialAssault' in self.linder.getPowers())
       self.linder.extendedRest()
       self.assertTrue('aerialAssault' in self.linder.getPowers())
+
+class TestGravisPowers(unittest.TestCase):
+   def setUp(self):
+      import gravis
+      self.gravis = gravis.Gravis()
+
+   def test_multiuse_availability(self):
+      self.assertTrue('healingWord' in self.gravis.getPowers())
+      self.gravis.powers['healingWord'].setUsed(True)
+      self.assertTrue('healingWord' in self.gravis.getPowers())
+      self.gravis.powers['healingWord'].setUsed(True)
+      self.assertFalse('healingWord' in self.gravis.getPowers())
+      self.gravis.shortRest()
+      self.assertTrue('healingWord' in self.gravis.getPowers())
 
 if __name__ == '__main__':
     unittest.main()

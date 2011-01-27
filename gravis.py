@@ -107,6 +107,8 @@ class HealingWord(Power):
       Power.__init__(self)
       self.frequency = 'encounter'
       self.action = 'minor'
+      self.maxUses = 2
+      self.usesRemaining = 2
 
 #daily
 class AstralCondemnation(Power):
