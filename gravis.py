@@ -22,6 +22,7 @@ class Gravis(Character):
 
       #proficiencies (only bothering with relevant ones)
       self.proficiency['staff'] = 2
+      self.proficiency['implement'] = 1 #implement expertise feat
       self.setLvl(1)
 
       #at-wills
@@ -38,9 +39,11 @@ class Gravis(Character):
       #dailies
       self.setPower(astralCondemnation=AstralCondemnation())
 
-      self.setWeapon(quarterstaff=Quarterstaff())
+      self.setWeapon(quarterstaff=Quarterstaff(),
+                     holySymbol=HolySymbol())
 
-      self.setEquip(main='quarterstaff')
+      self.setEquip(main='quarterstaff',
+                    implement='holySymbol')
 
 class Quarterstaff(Weapon):
    def __init__(self):
@@ -52,10 +55,24 @@ class Quarterstaff(Weapon):
       self.weaponType = 'staff'
       self.keywords = ['staff',]
 
+class HolySymbol(Weapon):
+   def __init__(self):
+      Weapon.__init__(self)
+      self.enhancement = 0
+      self.damageDie = 'd8'
+      self.numDie = 0
+      self.damageType = 'str'
+      self.weaponType = 'staff'
+      self.keywords = ['implement',]
+
 #at-will
 class PriestsShield(Power):
    def __init__(self):
       Power.__init__(self)
+      self.attackType = 'str'
+      self.defenseType = 'AC'
+      self.weaponsOfDamage = 1
+      self.abilityModDamage = ['str']
       self.frequency = 'at-will'
 
 class SacredFlame(Power):
