@@ -1,6 +1,6 @@
 from character import Character
 from weapon import Weapon
-from power import Power
+from power import Power, Attack
 
 class Linder(Character):
    def __init__(self):
@@ -108,39 +108,47 @@ class Unarmed(Weapon):
 class SlyFlourish(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['dex','cha']
       self.frequency = 'at-will'
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 1
+      primary.abilityModDamage = ['dex','cha']
+      self.setAttack(primary=primary)
 
 class AcrobaticStrike(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 1
+      primary.abilityModDamage = ['dex']
       self.frequency = 'at-will'
+      self.setAttack(primary=primary)
 
 #encounter
 class FadingStrike(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 1
+      primary.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+      self.setAttack(primary=primary)
 
 class JumpingBladeAssault(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC' #FIXME: or ref
-      self.weaponsOfDamage = 2
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC' #FIXME: or ref
+      primary.weaponsOfDamage = 2
+      primary.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+      self.setAttack(primary=primary)
 
 class OathOfEnmity(Power):
    def __init__(self):
@@ -157,11 +165,13 @@ class ShadowJaunt(Power):
 class CriticalOpportunity(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 3
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 3
+      primary.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+      self.setAttack(primary=primary)
 
 class TumblingDodge(Power):
    def __init__(self):
@@ -178,11 +188,13 @@ class CombatTumbleset(Power):
 class TornadoStrike(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 2
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 2
+      primary.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+      self.setAttack(primary=primary)
 
 class CleverMove(Power):
    def __init__(self):
@@ -193,11 +205,13 @@ class CleverMove(Power):
 class EscapeArtistsGambit(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 2
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 2
+      primary.abilityModDamage = ['dex']
       self.frequency = 'encounter'
+      self.setAttack(primary=primary)
 
 class SneakInTheAttack(Power):
    def __init__(self):
@@ -208,39 +222,52 @@ class SneakInTheAttack(Power):
 class RockyIVPunch(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'ref'
-      self.weaponsOfDamage = 0
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'ref'
+      primary.weaponsOfDamage = 0
       self.frequency = 'encounter'
       self.action = 'minor'
+      self.setAttack(primary=primary)
 
 #daily
 class SlayingStrike(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 5
-      self.abilityModDamage = ['dex','str']
       self.frequency = 'daily'
+      targetBloodied = Attack()
+      targetBloodied.attackType = 'dex'
+      targetBloodied.defenseType = 'AC'
+      targetBloodied.weaponsOfDamage = 5
+      targetBloodied.abilityModDamage = ['dex','str']
+      targetUnbloodied = Attack()
+      targetUnbloodied.attackType = 'dex'
+      targetUnbloodied.defenseType = 'AC'
+      targetUnbloodied.weaponsOfDamage = 3
+      targetUnbloodied.abilityModDamage = ['dex',]
+      self.setAttack(targetBloodied=targetBloodied,targetUnbloodied=targetUnbloodied)
 
 class AerialAssault(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'ref'
-      self.weaponsOfDamage = 3
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'ref'
+      primary.weaponsOfDamage = 3
+      primary.abilityModDamage = ['dex']
       self.frequency = 'daily'
+      self.setAttack(primary=primary)
 
 class TrickStrike(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'dex'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 3
-      self.abilityModDamage = ['dex']
+      primary = Attack()
+      primary.attackType = 'dex'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 3
+      primary.abilityModDamage = ['dex']
       self.frequency = 'daily'
+      self.setAttack(primary=primary)
 
 class BadIdeaFriend(Power):
    def __init__(self):

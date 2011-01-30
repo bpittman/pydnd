@@ -50,15 +50,20 @@ class TestLinderPowers(unittest.TestCase):
 
    def test_power_attack_bonus(self):
       self.linder.getPowerStats('slyFlourish',output=False)
-      self.assertEqual(self.linder.powers['slyFlourish'].attackBonus, 22)
-      self.assertEqual(self.linder.powers['slyFlourish'].totalDamage, '1d8+16')
-      self.assertEqual(self.linder.powers['slyFlourish'].maxDamage, '1d10+3d6+24')
+      self.assertEqual(self.linder.powers['slyFlourish'].attacks['primary'].attackBonus, 22)
+      self.assertEqual(self.linder.powers['slyFlourish'].attacks['primary'].totalDamage, '1d8+16')
+      self.assertEqual(self.linder.powers['slyFlourish'].attacks['primary'].maxDamage, '1d10+3d6+24')
 
    def test_multiweapon_power_bonus(self):
       self.linder.getPowerStats('slayingStrike',output=False)
-      self.assertEqual(self.linder.powers['slayingStrike'].attackBonus, 22)
-      self.assertEqual(self.linder.powers['slayingStrike'].totalDamage, '5d8+11')
-      self.assertEqual(self.linder.powers['slayingStrike'].maxDamage, '1d10+3d6+51')
+      bloodied = self.linder.powers['slayingStrike'].attacks['targetBloodied']
+      unbloodied = self.linder.powers['slayingStrike'].attacks['targetUnbloodied']
+      self.assertEqual(bloodied.attackBonus, 22)
+      self.assertEqual(bloodied.totalDamage, '5d8+11')
+      self.assertEqual(bloodied.maxDamage, '1d10+3d6+51')
+      self.assertEqual(unbloodied.attackBonus, 22)
+      self.assertEqual(unbloodied.totalDamage, '3d8+10')
+      self.assertEqual(unbloodied.maxDamage, '1d10+3d6+34')
 
    def test_encounter_availability(self):
       self.assertTrue('tornadoStrike' in self.linder.getPowers())

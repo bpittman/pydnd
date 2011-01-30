@@ -1,6 +1,6 @@
 from character import Character
 from weapon import Weapon
-from power import Power
+from power import Power, Attack
 
 class Gravis(Character):
    def __init__(self):
@@ -53,7 +53,7 @@ class Quarterstaff(Weapon):
       self.numDie = 1
       self.damageType = 'str'
       self.weaponType = 'staff'
-      self.keywords = ['staff',]
+      self.keywords = ['staff','weapon']
 
 class HolySymbol(Weapon):
    def __init__(self):
@@ -61,45 +61,73 @@ class HolySymbol(Weapon):
       self.enhancement = 0
       self.damageDie = 'd8'
       self.numDie = 0
-      self.damageType = 'str'
-      self.weaponType = 'staff'
+      self.weaponType = 'implement'
       self.keywords = ['implement',]
 
 #at-will
 class PriestsShield(Power):
    def __init__(self):
       Power.__init__(self)
-      self.attackType = 'str'
-      self.defenseType = 'AC'
-      self.weaponsOfDamage = 1
-      self.abilityModDamage = ['str']
       self.frequency = 'at-will'
+      self.keywords = ['divine','weapon']
+      primary = Attack()
+      primary.attackType = 'str'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 1
+      primary.abilityModDamage = ['str']
+      self.setAttack(primary=primary)
 
 class SacredFlame(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'at-will'
+      self.keywords = ['divine','implement','radiant']
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'ref'
+      primary.nonWeaponDamageDie = 'd6'
+      primary.nonWeaponNumDie = 1
+      primary.abilityModDamage = ['wis']
+      self.setAttack(primary=primary)
 
 class AstralSeal(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'at-will'
+      self.keywords = ['divine','healing','implement']
 
 #encounter
 class ShieldBearer(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'encounter'
+      self.keywords = ['conjuration','divine','implement','radiant']
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'ref'
+      primary.nonWeaponDamageDie = 'd8'
+      primary.nonWeaponNumDie = 2
+      primary.abilityModDamage = ['wis']
+      self.setAttack(primary=primary)
 
 class ChannelDivinityTurnUndead(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'encounter'
+      self.keywords = ['divine','implement','radiant']
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'wil'
+      primary.nonWeaponDamageDie = 'd10'
+      primary.nonWeaponNumDie = 1
+      primary.abilityModDamage = ['wis']
+      self.setAttack(primary=primary)
 
 class ChannelDivinityDivineFortune(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'encounter'
+      self.keywords = ['divine']
       #self.action = 'free' #FIXME
 
 class HealingWord(Power):
@@ -109,12 +137,21 @@ class HealingWord(Power):
       self.action = 'minor'
       self.maxUses = 2
       self.usesRemaining = 2
+      self.keywords = ['divine','healing']
 
 #daily
 class AstralCondemnation(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'daily'
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'ref'
+      primary.nonWeaponDamageDie = 'd6'
+      primary.nonWeaponNumDie = 3
+      primary.abilityModDamage = ['wis']
+      self.setAttack(primary=primary)
+      self.keywords = ['divine','implement','radiant']
 
 if __name__ == "__main__":
    import sys
