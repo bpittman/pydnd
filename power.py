@@ -44,12 +44,14 @@ class Attack:
       self.nonWeaponDamageDie = 'd4'
       self.nonWeaponNumDie = 0
       self.weaponsOfDamage = 0
+      self.extraAttack = 0
       self.abilityModDamage = []
 
    def generateStats(self, char,weapon):
       if self.attackType:
          self.attackBonus = char.lvl/2 + char.abilityMod[self.attackType]
          self.attackBonus += char.proficiency[weapon.weaponType] + weapon.enhancement
+         self.attackBonus += self.extraAttack
 
          weaponDamageBonus = weapon.enhancement
          abilityWeaponBonus = sum([char.abilityMod[mod] for mod in self.abilityModDamage])

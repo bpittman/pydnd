@@ -101,6 +101,12 @@ class AstralSeal(Power):
       Power.__init__(self)
       self.frequency = 'at-will'
       self.keywords = ['divine','healing','implement']
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'ref'
+      primary.weaponsOfDamage = 0
+      primary.extraAttack = 2
+      self.setAttack(primary=primary)
 
 #encounter
 class ShieldBearer(Power):

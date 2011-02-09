@@ -107,5 +107,9 @@ class TestGravisPowers(unittest.TestCase):
       self.gravis.shortRest()
       self.assertTrue('healingWord' in self.gravis.getPowers())
 
+   def test_power_attack_bonus(self):
+      self.gravis.getPowerStats('astralSeal',hand='implement',output=False)
+      self.assertEqual(self.gravis.powers['astralSeal'].attacks['primary'].attackBonus, 8)
+
 if __name__ == '__main__':
     unittest.main()
