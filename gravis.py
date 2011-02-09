@@ -13,6 +13,9 @@ class Gravis(Character):
       #background trait
       self.skill['insight'].miscBonus = 2
 
+      #combat medic feat bonus
+      self.skill['heal'].miscBonus = 2
+
       #armor penalties
       self.skill['acrobatics'].miscBonus = -1
       self.skill['athletics'].miscBonus = -1
@@ -22,8 +25,9 @@ class Gravis(Character):
 
       #proficiencies (only bothering with relevant ones)
       self.proficiency['staff'] = 2
+      self.proficiency['mace'] = 2
       self.proficiency['implement'] = 1 #implement expertise feat
-      self.setLvl(1)
+      self.setLvl(2)
 
       #at-wills
       self.setPower(priestsShield=PriestsShield(),
@@ -37,30 +41,32 @@ class Gravis(Character):
                     healingWord=HealingWord())
 
       #dailies
-      self.setPower(astralCondemnation=AstralCondemnation())
+      self.setPower(astralCondemnation=AstralCondemnation(),
+                    shieldOfFaith=ShieldOfFaith())
 
-      self.setWeapon(quarterstaff=Quarterstaff(),
-                     holySymbol=HolySymbol())
+      self.setWeapon(mace=Mace(),
+                     symbolOfDaring=SymbolOfDaring())
 
-      self.setEquip(main='quarterstaff',
-                    implement='holySymbol')
+      self.setEquip(main='mace',
+                    implement='symbolOfDaring')
 
-class Quarterstaff(Weapon):
+class Mace(Weapon):
    def __init__(self):
       Weapon.__init__(self)
       self.enhancement = 0
       self.damageDie = 'd8'
       self.numDie = 1
       self.damageType = 'str'
-      self.weaponType = 'staff'
-      self.keywords = ['staff','weapon']
+      self.weaponType = 'mace'
+      self.keywords = ['mace','weapon']
 
-class HolySymbol(Weapon):
+class SymbolOfDaring(Weapon):
    def __init__(self):
       Weapon.__init__(self)
-      self.enhancement = 0
+      self.enhancement = 1
       self.damageDie = 'd8'
       self.numDie = 0
+      self.extraCrit = '1d6'
       self.weaponType = 'implement'
       self.keywords = ['implement',]
 
@@ -152,6 +158,12 @@ class AstralCondemnation(Power):
       primary.abilityModDamage = ['wis']
       self.setAttack(primary=primary)
       self.keywords = ['divine','implement','radiant']
+
+class ShieldOfFaith(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'daily'
+      self.keywords = ['divine']
 
 if __name__ == "__main__":
    import sys
