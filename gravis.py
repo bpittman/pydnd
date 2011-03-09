@@ -27,7 +27,7 @@ class Gravis(Character):
       self.proficiency['staff'] = 2
       self.proficiency['mace'] = 2
       self.proficiency['implement'] = 1 #implement expertise feat
-      self.setLvl(2)
+      self.setLvl(3)
 
       #at-wills
       self.setPower(priestsShield=PriestsShield(),
@@ -38,7 +38,8 @@ class Gravis(Character):
       self.setPower(shieldBearer=ShieldBearer(),
                     channelDivinityTurnUndead=ChannelDivinityTurnUndead(),
                     channelDivinityDivineFortune=ChannelDivinityDivineFortune(),
-                    healingWord=HealingWord())
+                    healingWord=HealingWord(),
+                    hymnOfResurgence=HymnOfResurgence())
 
       #dailies
       self.setPower(astralCondemnation=AstralCondemnation(),
@@ -109,6 +110,17 @@ class AstralSeal(Power):
       self.setAttack(primary=primary)
 
 #encounter
+class HymnOfResurgence(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.keywords = ['divine','implement']
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'for'
+      primary.weaponsOfDamage = 0
+      self.setAttack(primary=primary)
+
 class ShieldBearer(Power):
    def __init__(self):
       Power.__init__(self)
