@@ -5,7 +5,7 @@ from power import Power, Attack
 class Gravis(Character):
    def __init__(self):
       Character.__init__(self)
-      self.setAbilities(str=12, con=10, dex=10, int=12, wis=17, cha=16)
+      self.setAbilities(str=12, con=10, dex=10, int=12, wis=18, cha=17)
 
       self.setSkills(heal=True, insight=True, arcana=True, history=True,
                      religion=True)
@@ -27,7 +27,7 @@ class Gravis(Character):
       self.proficiency['staff'] = 2
       self.proficiency['mace'] = 2
       self.proficiency['implement'] = 1 #implement expertise feat
-      self.setLvl(3)
+      self.setLvl(4)
 
       #at-wills
       self.setPower(priestsShield=PriestsShield(),

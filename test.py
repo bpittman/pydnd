@@ -28,19 +28,22 @@ class TestGravis(unittest.TestCase):
       import gravis
       self.gravis = gravis.Gravis()
 
+   def testLevel(self):
+      self.assertEqual(self.gravis.lvl, 4)
+
    def test_skill(self):
-      self.assertEqual(self.gravis.skill['stealth'].value(), 0)
-      self.assertEqual(self.gravis.skill['athletics'].value(), 1)
-      self.assertEqual(self.gravis.skill['arcana'].value(), 7)
-      self.assertEqual(self.gravis.skill['heal'].value(), 11)
-      self.assertEqual(self.gravis.skill['insight'].value(), 11)
+      self.assertEqual(self.gravis.skill['stealth'].value(), 1)
+      self.assertEqual(self.gravis.skill['athletics'].value(), 2)
+      self.assertEqual(self.gravis.skill['arcana'].value(), 8)
+      self.assertEqual(self.gravis.skill['heal'].value(), 13)
+      self.assertEqual(self.gravis.skill['insight'].value(), 13)
 
    def test_ability_mod(self):
       self.assertEqual(self.gravis.abilityMod['str'], 1)
       self.assertEqual(self.gravis.abilityMod['con'], 0)
       self.assertEqual(self.gravis.abilityMod['dex'], 0)
       self.assertEqual(self.gravis.abilityMod['int'], 1)
-      self.assertEqual(self.gravis.abilityMod['wis'], 3)
+      self.assertEqual(self.gravis.abilityMod['wis'], 4)
       self.assertEqual(self.gravis.abilityMod['cha'], 3)
 
 class TestLinderPowers(unittest.TestCase):
@@ -88,13 +91,13 @@ class TestGravisPowers(unittest.TestCase):
 
    def test_implement_attack(self):
       self.gravis.getPowerStats('sacredFlame',hand='implement',output=False)
-      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].attackBonus, 6)
-      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].totalDamage, '1d6+4')
-      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].maxDamage, '1d6+10')
+      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].attackBonus, 8)
+      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].totalDamage, '1d6+5')
+      self.assertEqual(self.gravis.powers['sacredFlame'].attacks['primary'].maxDamage, '1d6+11')
 
    def test_mace_attack(self):
       self.gravis.getPowerStats('priestsShield',hand='main',output=False)
-      self.assertEqual(self.gravis.powers['priestsShield'].attacks['primary'].attackBonus, 4)
+      self.assertEqual(self.gravis.powers['priestsShield'].attacks['primary'].attackBonus, 5)
       self.assertEqual(self.gravis.powers['priestsShield'].attacks['primary'].totalDamage, '1d8+1')
       self.assertEqual(self.gravis.powers['priestsShield'].attacks['primary'].maxDamage, '9')
 
@@ -109,7 +112,7 @@ class TestGravisPowers(unittest.TestCase):
 
    def test_power_attack_bonus(self):
       self.gravis.getPowerStats('astralSeal',hand='implement',output=False)
-      self.assertEqual(self.gravis.powers['astralSeal'].attacks['primary'].attackBonus, 8)
+      self.assertEqual(self.gravis.powers['astralSeal'].attacks['primary'].attackBonus, 10)
 
 if __name__ == '__main__':
     unittest.main()
