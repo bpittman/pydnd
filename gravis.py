@@ -27,10 +27,10 @@ class Gravis(Character):
       self.proficiency['staff'] = 2
       self.proficiency['mace'] = 2
       self.proficiency['implement'] = 1 #implement expertise feat
-      self.setLvl(4)
+      self.setLvl(5)
 
       #at-wills
-      self.setPower(priestsShield=PriestsShield(),
+      self.setPower(lanceOfFaith=LanceOfFaith(),
                     sacredFlame=SacredFlame(),
                     astralSeal=AstralSeal())
 
@@ -39,17 +39,19 @@ class Gravis(Character):
                     channelDivinityTurnUndead=ChannelDivinityTurnUndead(),
                     channelDivinityDivineFortune=ChannelDivinityDivineFortune(),
                     healingWord=HealingWord(),
-                    hymnOfResurgence=HymnOfResurgence())
+                    hymnOfResurgence=HymnOfResurgence(),
+                    radiantSmite=RadiantSmite())
 
       #dailies
       self.setPower(astralCondemnation=AstralCondemnation(),
-                    shieldOfFaith=ShieldOfFaith())
+                    shieldOfFaith=ShieldOfFaith(),
+                    spiritualWeapon=SpiritualWeapon())
 
       self.setWeapon(mace=Mace(),
-                     symbolOfDaring=SymbolOfDaring())
+                     orbOfLight=OrbOfLight())
 
       self.setEquip(main='mace',
-                    implement='symbolOfDaring')
+                    implement='orbOfLight')
 
 class Mace(Weapon):
    def __init__(self):
@@ -61,27 +63,28 @@ class Mace(Weapon):
       self.weaponType = 'mace'
       self.keywords = ['mace','weapon']
 
-class SymbolOfDaring(Weapon):
+class OrbOfLight(Weapon):
    def __init__(self):
       Weapon.__init__(self)
-      self.enhancement = 1
+      self.enhancement = 2
       self.damageDie = 'd8'
       self.numDie = 0
-      self.extraCrit = '1d6'
+      self.extraCrit = '2d6'
       self.weaponType = 'implement'
       self.keywords = ['implement',]
 
 #at-will
-class PriestsShield(Power):
+class LanceOfFaith(Power):
    def __init__(self):
       Power.__init__(self)
       self.frequency = 'at-will'
-      self.keywords = ['divine','weapon']
+      self.keywords = ['divine','implement','radiant']
       primary = Attack()
-      primary.attackType = 'str'
-      primary.defenseType = 'AC'
-      primary.weaponsOfDamage = 1
-      primary.abilityModDamage = ['str']
+      primary.attackType = 'wis'
+      primary.defenseType = 'ref'
+      primary.nonWeaponDamageDie = 'd8'
+      primary.nonWeaponNumDie = 1
+      primary.abilityModDamage = ['wis']
       self.setAttack(primary=primary)
 
 class SacredFlame(Power):
@@ -163,6 +166,18 @@ class HealingWord(Power):
       self.usesRemaining = 2
       self.keywords = ['divine','healing']
 
+class RadiantSmite(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'encounter'
+      self.keywords = ['divine','radiant','weapon']
+      primary = Attack()
+      primary.attackType = 'str'
+      primary.defenseType = 'AC'
+      primary.weaponsOfDamage = 2
+      primary.abilityModDamage = ['str','wis']
+      self.setAttack(primary=primary)
+
 #daily
 class AstralCondemnation(Power):
    def __init__(self):
@@ -176,6 +191,19 @@ class AstralCondemnation(Power):
       primary.abilityModDamage = ['wis']
       self.setAttack(primary=primary)
       self.keywords = ['divine','implement','radiant']
+
+class SpiritualWeapon(Power):
+   def __init__(self):
+      Power.__init__(self)
+      self.frequency = 'daily'
+      primary = Attack()
+      primary.attackType = 'wis'
+      primary.defenseType = 'AC'
+      primary.nonWeaponDamageDie = 'd10'
+      primary.nonWeaponNumDie = 1
+      primary.abilityModDamage = ['wis']
+      self.setAttack(primary=primary)
+      self.keywords = ['divine','implement','conjuration']
 
 class ShieldOfFaith(Power):
    def __init__(self):
